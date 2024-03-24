@@ -48,10 +48,6 @@ def read_user(user_id: int, db: _orm.Session=_fastapi.Depends(_services.get_db))
     
     return db_user
 
-@app.get("/post/{post_id}/combined")
-def getCombinedData(post_id: int, db: _orm.Session=_fastapi.Depends(_services.get_db)):
-    pass
-
 @app.post("/users/{user_id}/posts", response_model=_schemas.Post)
 def create_post(
     user_id: int,

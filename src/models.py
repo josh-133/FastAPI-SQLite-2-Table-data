@@ -6,8 +6,7 @@ import database as _database
 
 class User(_database.Base):
     __tablename__ = "users"
-    user_id = _sql.Column(_sql.Integer, primary_key=True, index=True)
-    user_name = _sql.Column(_sql.String, unique=True)
+    id = _sql.Column(_sql.Integer, primary_key=True, index=True)
     email = _sql.Column(_sql.String, unique=True, index=True)
     hashed_password = _sql.Column(_sql.String)
     is_active = _sql.Column(_sql.Boolean, default=True)
@@ -16,10 +15,10 @@ class User(_database.Base):
     
 class Post(_database.Base):
     __tablename__ = "posts"
-    post_id = _sql.Column(_sql.Integer, primary_key=True, index=True)
+    id = _sql.Column(_sql.Integer, primary_key=True, index=True)
     title = _sql.Column(_sql.String, index=True)
     content = _sql.Column(_sql.String, index=True)
-    owner_id = _sql.Column(_sql.Integer, _sql.ForeignKey("users.user_id"))
+    owner_id = _sql.Column(_sql.Integer, _sql.ForeignKey("users.id"))
     date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
     date_last_updated = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
     

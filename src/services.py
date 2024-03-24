@@ -46,18 +46,6 @@ def delete_post(db: _orm.Session, post_id: int):
     db.query(_models.Post).filter(_models.Post.id == post_id).delete()
     db.commit()
     
-def get_combined_data(db: _orm.Session, post_id: int):
-    db_post = get_post(db, post_id)
-    db_user = get_user(db, db_post.owner_id)
-    
-    return {
-        "user_id": db_user.user_id,
-        "user_name": db_user.user_name,
-        "email": db_user.email,
-        "post_id": db_post.post_id,
-        "title": db_post.title
-    } 
-    
 def update_post(db: _orm.Session, post: _schemas.PostCreate, post_id: int):
     db_post = get_post(db=db, post_id=post_id)
     db_post.title = post.title
